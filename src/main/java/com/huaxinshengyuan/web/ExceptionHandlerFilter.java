@@ -1,6 +1,5 @@
 package com.huaxinshengyuan.web;
 
-import java.io.File;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -10,12 +9,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileWriter;
-import org.springframework.data.neo4j.config.Neo4jConfiguration;
+
 
 public class ExceptionHandlerFilter implements Filter {
-
-	private String errorMsg = "";
 
 	public void doFilter(ServletRequest servletRequest,
 			ServletResponse servletResponse, FilterChain filterChain)
@@ -34,8 +30,7 @@ public class ExceptionHandlerFilter implements Filter {
 			}
 			else
 			{
-				File f = exceptionToHTMLFile(ex);
-	            request.setAttribute("errorMsg", errorMsg);
+	            request.setAttribute("errorMsg", getErrorMsg(ex));
 				request.getRequestDispatcher(
 						"/WEB-INF/views/uncaughtException.jsp").forward(
 						request, respone);
@@ -56,7 +51,7 @@ public class ExceptionHandlerFilter implements Filter {
 
 	}
 
-	protected File exceptionToHTMLFile(Exception exc) {
+	protected String getErrorMsg(Exception exc) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -100,25 +95,9 @@ public class ExceptionHandlerFilter implements Filter {
 				sb.append("<p>Caused by:</p>" + "\n");
 		}
 		sb.append("</body></html>" + "\n");
-		FileWriter fw;
-		try {
-
-			File f = new File("ex.html");
-			if (!f.exists())
-				f.createNewFile();
-			// System.out.println("___file path: " + f.getAbsolutePath());
-			fw = new FileWriter(f, false);
-			fw.write(sb.toString());
-			// System.out.println(sb.toString());
-			errorMsg = sb.toString();
-			fw.close();
-			return f;
-
-		} catch (IOException e1) {
-			// System.out.println("IOIOIO error!");
-			e1.printStackTrace();
-			return null;
-		}
+	    return sb.toString();
+		
+		
 
 	}
 

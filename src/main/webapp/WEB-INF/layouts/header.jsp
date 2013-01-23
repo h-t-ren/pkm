@@ -5,7 +5,8 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <c:url var="englishLocaleUrl" value="/"><c:param name="locale" value="" /></c:url> 
 <c:url var="chineseLocaleUrl" value="/"><c:param name="locale" value="cn" /></c:url>
-
+<c:url var="login" value="/login/login" />
+<c:url var="logout" value="/login/logout" />
 <div id="nav_top">
   <div id="app_area" >
      <fmt:message key="app_name" />
@@ -25,7 +26,7 @@
    <security:authorize access="isAnonymous()">
 	<a id="headerActiveLink" href="${login}"><fmt:message key="login" /></a>
   </security:authorize>
-    <a id="headerActiveLink1" target="_blank" href="<c:url value="/contact?usr=anonymous" />"><fmt:message key="contact" /></a>&nbsp; 
+ 
   </div>
 </div>
 

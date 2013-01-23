@@ -6,7 +6,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Enrima GUI</title>
+<title>PKM</title>
 <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js" djConfig="parseOnLoad: true"> </script>
 <script type="text/javascript" src="<c:url value="http://code.jquery.com/jquery-1.7.1.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.form.js" />"></script>
@@ -38,7 +38,7 @@
             </div>
      
             <div id="footer_copyrights" dojoType="dijit.layout.ContentPane" region="bottom">
-                 Copyright &copy; 2012-<script type="text/javascript"> var d = new Date();document.write(d.getFullYear());</script> &nbsp; IME,IIASA
+                 Copyright &copy; 2012-<script type="text/javascript"> var d = new Date();document.write(d.getFullYear());</script> &nbsp; Hongtao Ren
             </div>
         </div>
 

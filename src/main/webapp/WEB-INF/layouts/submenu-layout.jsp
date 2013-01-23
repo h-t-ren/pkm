@@ -6,7 +6,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Enrima GUI</title>
+<title>PKM</title>
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery-latest.js" />"></script>	
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.form.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery-ui-latest.js" />"></script>	
@@ -87,7 +87,7 @@
   </div>
 
  <div class="ui-layout-south" id="footer_copyrights">
- Copyright &copy; 2012-<script type="text/javascript"> var d = new Date();document.write(d.getFullYear());</script> &nbsp; IME,IIASA
+ Copyright &copy; 2012-<script type="text/javascript"> var d = new Date();document.write(d.getFullYear());</script> &nbsp; Hongtao Ren
   </div>
 
 </body>
