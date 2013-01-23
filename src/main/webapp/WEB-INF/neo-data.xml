@@ -16,7 +16,7 @@
 	<!--<neo4j:config storeDirectory="${graph.db.location}" />-->
 	
 	
-     <neo4j:config storeDirectory="/home/hongtao/huaxinshengyuan/pkm/data/graph.db"/>
+     <neo4j:config storeDirectory="target/graph.db"/>
     
 	<!-- REST -->
 	<!-- 

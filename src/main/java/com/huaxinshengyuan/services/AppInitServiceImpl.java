@@ -7,8 +7,6 @@ import com.huaxinshengyuan.domain.Role;
 import com.huaxinshengyuan.domain.User;
 import com.huaxinshengyuan.domain.UserType;
 
-import org.apache.el.ExpressionFactoryImpl;
-
 
 @Service("appInitService")
 @Transactional

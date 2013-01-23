@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.huaxinshengyuan.services.AppInitService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/applicationContext.xml")
+@ContextConfiguration("/applicationContext.xml")
 @Transactional
 public class UserlTest {
 	private Logger log = LoggerFactory.getLogger(this.getClass());

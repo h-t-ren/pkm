@@ -14,7 +14,7 @@
    
     
      <!-- Embedded -->
-    <neo4j:config storeDirectory="data/graph.db" />
+    <neo4j:config storeDirectory="target/graph.db" />
     <context:component-scan base-package="com.huaxinshengyuan.services"/>
     <neo4j:repositories base-package="com.huaxinshengyuan.repository"/>
 	<tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/>

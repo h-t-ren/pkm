@@ -40,7 +40,7 @@
 		<security:authentication-provider
 			user-service-ref="userDetailsService">
 			<security:password-encoder hash="md5">
-				<security:salt-source system-wide="yibayan" />
+				<security:salt-source system-wide="pkm" />
 			</security:password-encoder>
 		</security:authentication-provider>
 	</security:authentication-manager>
