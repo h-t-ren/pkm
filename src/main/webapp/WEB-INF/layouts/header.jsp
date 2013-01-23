@@ -33,10 +33,8 @@
 <div id="navmenu">
 <ul id="nav">
 
-        <li><a class="headerActiveLink" href="<c:url value="/model/" />"><fmt:message key="sms" /></a></li>
- 	    <li><a class="headerActiveLink" href="<c:url value="/model" />"><fmt:message key="data" /></a></li>
- 	    <li><a class="headerActiveLink"><fmt:message key="analysis" /></a></li>
-
+        <li><a class="headerActiveLink" href="<c:url value="/admin" />"><fmt:message key="admin" /></a></li>
+ 	    <li><a class="headerActiveLink" href="<c:url value="/knowledge/dashboard" />"><fmt:message key="newKnowledge" /></a></li>
 </ul>
 
 </div>

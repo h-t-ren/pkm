@@ -6,12 +6,15 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>PKM</title>
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery-latest.js" />"></script>	
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.form.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery-ui-latest.js" />"></script>	
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.layout-latest.js" />"></script>	
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.dataTables.js" />"></script>	
+<!-- TinyMCE -->
+<script type="text/javascript" src="<c:url value="/resources/javascript/tiny_mce/tiny_mce.js" />"></script>	
 
 <link rel="stylesheet" href="<c:url value="/resources/styles/blueprint/screen.css" />" type="text/css" media="screen, projection" />
 <link rel="stylesheet" href="<c:url value="/resources/styles/blueprint/print.css" />" type="text/css" media="print" />
@@ -22,6 +25,10 @@
 <link rel="stylesheet" href="<c:url value="/resources/styles/table.css" />" type="text/css" media="screen, projection" />
 <link rel="stylesheet" href="<c:url value="/resources/styles/layout-default-latest.css" />" type="text/css" media="screen" />
 <link rel="stylesheet" href="<c:url value="/resources/messages/messages.css" />" type="text/css" media="screen, projection" />
+
+
+
+
 <style type="text/css">
    html, body { width: 100%; height: 100%; margin: 0; }
 </style>

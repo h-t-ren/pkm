@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	
+	
+    <definition name="new/dashboard" extends="pkmSubMenuLayout">
+		<put-attribute name="submenu" value="/WEB-INF/views/new/submenu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/new/dashboard.jsp" />
+	</definition>
+	<definition name="new/knowledgeNode" extends="pkmSubMenuLayout">
+		<put-attribute name="submenu" value="/WEB-INF/views/new/submenu.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/new/knowledgeForm.jsp" />
+	</definition>
+	
+
+</tiles-definitions>

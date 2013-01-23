@@ -14,10 +14,6 @@
 	<security:http pattern="/resources/**" security="none" />
 	<security:http  auto-config="true" use-expressions="true" disable-url-rewriting="true">
 		<!-- Authentication policy -->
-
-		<!-- <security:form-login login-page="/login/login" login-processing-url="/login/login/authenticate" 
-			default-target-url="/" authentication-failure-url="/login/login?login_error=1" 
-			always-use-default-target="true"/> -->
 		<security:form-login login-page="/login/login"
 			login-processing-url="/login/login/authenticate"
 			authentication-failure-url="/login/login?login_error=1" />
