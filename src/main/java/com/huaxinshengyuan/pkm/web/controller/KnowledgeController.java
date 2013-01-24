@@ -1,8 +1,13 @@
 package com.huaxinshengyuan.pkm.web.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.huaxinshengyuan.pkm.domain.KnowledgeNode;
 import com.huaxinshengyuan.pkm.domain.User;
@@ -25,6 +31,9 @@ public class KnowledgeController {
 
 	@Autowired private KnowledgeNodeService knowledgeNodeService;
 	@Autowired private PkmUserDetailsService userDetailsService;
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+	@Value("#{prop['uploaded_file_path']}") private String filePath;
+	
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String populateDashboard(Model model) {
 		return "knowledge/dashboard";
@@ -46,7 +55,9 @@ public class KnowledgeController {
 			@RequestParam(value = "save", required = false) String save,
 			@RequestParam(value = "cancel", required = false) String cancel,
 			@PathVariable("nodeId") long nodeId,
-			@ModelAttribute KnowledgeNode knowledgeNode, Model model) {
+			@ModelAttribute KnowledgeNode knowledgeNode,
+			@RequestParam(value="files[]", required=false) MultipartFile[] files,
+			Model model)throws Exception {
 		if (cancel != null) {
 			return "redirect:/knowledge/dashboard";
 		}
@@ -62,7 +73,16 @@ public class KnowledgeController {
 			knowledgeNode.setCreated(new Date());
 			knowledgeNode.setUser(user);
 		}
-
+		for (MultipartFile file : files) {
+			
+			if(!file.getOriginalFilename().isEmpty())
+			{
+				log.debug("---file: " +file.getOriginalFilename() +"---");
+				File disFile = new File(filePath+file.getOriginalFilename());
+		 	    file.transferTo(disFile);
+			}
+			
+		}
 		knowledgeNodeService.save(knowledgeNode);
 		System.out.println("---knowledge id: " + knowledgeNode.getId());
 		return "redirect:/knowledge/dashboard";

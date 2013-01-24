@@ -39,7 +39,18 @@
 <!-- /TinyMCE -->
 
 
-<form:form modelAttribute="knowledgeNode">
+  <script type="text/javascript">
+    jQuery(function($)
+    {
+      $('#file_input').multifile();
+    });
+  </script>
+	<div class="header">
+			<c:if test="${not empty message}">
+				<div id="message" class="success"><pre><c:out escapeXml="true" value="${message}"/></pre></div>
+			</c:if>
+		</div>
+<form:form modelAttribute="knowledgeNode" enctype="multipart/form-data">
 	<div>
 	    <div>
 			 Title:<form:input path="name"  style="width: 85%"/>
@@ -50,6 +61,9 @@
 		</div>
 		<div>
 			 Description: <form:textarea  path="description" rows="15" cols="80" style="width: 90%" />
+		</div>
+		<div>
+		     Files: <input id="file_input" type="file" name="files[]">
 		</div>
 		<input type="submit" name="save" value="Save" />
 		<input type="submit" name="canel" value="Cancel" />
