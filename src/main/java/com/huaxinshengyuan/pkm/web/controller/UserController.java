@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.huaxinshengyuan.pkm.domain.User;
 import com.huaxinshengyuan.pkm.services.UserService;
 
@@ -21,22 +23,22 @@ public class UserController {
 		
 		return "/user/list";
 	}
-	@RequestMapping(value = "/form/{userid}", method = RequestMethod.GET)
-	public String populateUserForm(@PathVariable("userid") long userid, Model model) {
+	@RequestMapping(value = "/form/{userId}", method = RequestMethod.GET)
+	public String populateUserForm(@PathVariable("userId") long userId, Model model) {
 		User user;
-		if(userid==-1)
+		if(userId==-1)
 		{
 			user = new User();
 		}
 		else
 		{
-			user = userService.findById(userid);
+			user = userService.findById(userId);
 		}
 		model.addAttribute("user", user);
 		return "/user/form";
 	}
-	@RequestMapping(value = "/form/{userid}", method = RequestMethod.POST) @Transactional
-	public String saveKnowledge(@ModelAttribute User user, Model model) {
+	@RequestMapping(value = "/form/{userId}", method = RequestMethod.POST) @Transactional
+	public String register(@ModelAttribute User user, Model model) {
 		userService.register(user);
 		return "redirect:/user/list";
 	}

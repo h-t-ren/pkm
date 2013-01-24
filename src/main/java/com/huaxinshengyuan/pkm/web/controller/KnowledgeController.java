@@ -1,25 +1,85 @@
 package com.huaxinshengyuan.pkm.web.controller;
 
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.huaxinshengyuan.pkm.domain.KnowledgeNode;
+import com.huaxinshengyuan.pkm.domain.User;
+import com.huaxinshengyuan.pkm.services.KnowledgeNodeService;
+import com.huaxinshengyuan.pkm.services.PkmUserDetailsService;
+
+
 @Controller @RequestMapping(value = "/knowledge")
+@Transactional(readOnly=true)
 public class KnowledgeController {
 
+	@Autowired private KnowledgeNodeService knowledgeNodeService;
+	@Autowired private PkmUserDetailsService userDetailsService;
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-	public String populateDashboard( Model model) {
-		return "new/dashboard";
+	public String populateDashboard(Model model) {
+		return "knowledge/dashboard";
 	}
-	@RequestMapping(value = "/node/new", method = RequestMethod.GET)
-	public String populateKnowledgeForm( Model model) {
-		return "new/knowledgeNode";
+	@RequestMapping(value = "/node/{nodeId}/edit", method = RequestMethod.GET)
+	public String populateKnowledgeForm(@PathVariable("nodeId") long nodeId, Model model) {
+		populateKnowledge(nodeId, model);
+		return "knowledgeNode/form";
 	}
-	@RequestMapping(value = "/node/new", method = RequestMethod.POST)
-	public String saveKnowledge(@RequestParam(value = "content", required = false) String content, Model model) {
-		model.addAttribute("content", content);
-		return "new/knowledgeNode";
+	@RequestMapping(value = "/node/{nodeId}/view", method = RequestMethod.GET)
+	public String populateKnowledgeView(@PathVariable("nodeId") long nodeId, Model model) {
+		populateKnowledge(nodeId, model);
+		return "knowledgeNode/view";
 	}
+	
+	@RequestMapping(value = "/node/{nodeId}/edit", method = RequestMethod.POST)
+	@Transactional
+	public String saveKnowledge(
+			@RequestParam(value = "save", required = false) String save,
+			@RequestParam(value = "cancel", required = false) String cancel,
+			@PathVariable("nodeId") long nodeId,
+			@ModelAttribute KnowledgeNode knowledgeNode, Model model) {
+		if (cancel != null) {
+			return "redirect:/knowledge/dashboard";
+		}
+		User user = userDetailsService.getUserFromSession();
+		if(nodeId!=-1) //modify existing knowledge node
+		{
+			knowledgeNode.setId(nodeId);
+			knowledgeNode.setLastModified(new Date());
+			knowledgeNode.setModifier(user);
+		}
+		else  //create new knowledge node
+		{
+			knowledgeNode.setCreated(new Date());
+			knowledgeNode.setUser(user);
+		}
+
+		knowledgeNodeService.save(knowledgeNode);
+		System.out.println("---knowledge id: " + knowledgeNode.getId());
+		return "redirect:/knowledge/dashboard";
+	}
+	
+
+	public void populateKnowledge(long nodeId, Model model) {
+		KnowledgeNode knowledgeNode;
+		if(nodeId==-1)
+		{
+			 knowledgeNode = new KnowledgeNode();	
+		}
+		else
+		{
+			knowledgeNode = knowledgeNodeService.find(nodeId);
+		}
+		model.addAttribute("knowledgeNode", knowledgeNode);
+	}
+	
 }

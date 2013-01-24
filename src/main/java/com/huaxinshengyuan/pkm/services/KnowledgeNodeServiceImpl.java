@@ -38,6 +38,11 @@ public class KnowledgeNodeServiceImpl implements KnowledgeNodeService {
 		
 	}
 
+	@Override
+	public KnowledgeNode find(long id) {
+		return knowledgeNodeRepository.findOne(id);
+	}
+
 
 
 }
