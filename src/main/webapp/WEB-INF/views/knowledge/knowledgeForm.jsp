@@ -42,17 +42,15 @@
 <form:form modelAttribute="knowledgeNode">
 	<div>
 	    <div>
-			 Title: <form:input path="name" />
+			 Title:<form:input path="name"  style="width: 85%"/>
 
+		</div>
+		   <div>
+			 URL: <form:input path="url"  style="width: 85%" />
 		</div>
 		<div>
-			 Description: <form:textarea  path="description" rows="15" cols="80" style="width: 80%" />
+			 Description: <form:textarea  path="description" rows="15" cols="80" style="width: 90%" />
 		</div>
-        <div>
-			 URL: <form:input path="url" />
-
-		</div>
-		<br />
 		<input type="submit" name="save" value="Save" />
 		<input type="submit" name="canel" value="Cancel" />
 	</div>

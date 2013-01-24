@@ -5,8 +5,7 @@
 	    <div>Title:${knowledgeNode.name}</div>
 	    <div>creator:${knowledgeNode.user.login}</div>
 	    <div>create date:${knowledgeNode.created}</div>
+	    <div>URL:${knowledgeNode.url}</div>
 		<div>Description: <br/>${knowledgeNode.description}</div>
-		<div>URL:${knowledgeNode.url}</div>
-
 	</div>
 
