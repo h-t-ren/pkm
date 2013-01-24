@@ -12,7 +12,7 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	<!-- Activates various annotations to be detected in bean classes -->
 	<context:annotation-config />
-    <context:component-scan base-package="com.huaxinshengyuan.web.controller"/>
+    <context:component-scan base-package="com.huaxinshengyuan.pkm.web.controller"/>
 	<!-- Configures the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven/>
 	<mvc:view-controller path="/" view-name="home"/> 	

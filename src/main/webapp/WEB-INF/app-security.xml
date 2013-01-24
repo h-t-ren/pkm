@@ -41,7 +41,7 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 	<bean id="userDetailsService"
-		class="com.huaxinshengyuan.services.PkmUserDetailsService" />
+		class="com.huaxinshengyuan.pkm.services.PkmUserDetailsService" />
 		
 	<!-- Automatically receives AuthenticationEvent messages -->
 	<bean id="loggerListener"

@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
 	<!-- Activate Spring Data Neo4j repository support -->
-	<neo4j:repositories base-package="com.huaxinshengyuan.repository" />
+	<neo4j:repositories base-package="com.huaxinshengyuan.pkm.repository" />
 
     <!-- Embedded -->
 	<!--<neo4j:config storeDirectory="${graph.db.location}" />-->

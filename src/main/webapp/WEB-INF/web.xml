@@ -71,7 +71,7 @@
 
 	<filter>
 		<filter-name>errorHandlerFilter</filter-name>
-		<filter-class>com.huaxinshengyuan.web.ExceptionHandlerFilter</filter-class>
+		<filter-class>com.huaxinshengyuan.pkm.web.ExceptionHandlerFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>errorHandlerFilter</filter-name>
