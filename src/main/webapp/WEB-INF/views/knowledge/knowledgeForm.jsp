@@ -56,6 +56,10 @@
 			 Title:<form:input path="name"  style="width: 85%"/>
 
 		</div>
+		 <div id="jquery-live-search">
+			 Tags: <input type="text" name="tags" style="width: 85%"/>
+		</div>
+		 
 		   <div>
 			 URL: <form:input path="url"  style="width: 85%" />
 		</div>

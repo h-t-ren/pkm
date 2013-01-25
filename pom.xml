@@ -26,17 +26,15 @@
 	
 <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>3.1.0.RELEASE</spring.version>
+		<spring.version>3.2.0.RELEASE</spring.version>
 		<spring.security-version>3.1.0.RELEASE</spring.security-version>
 		<slf4j.version>1.6.1</slf4j.version>
 		<spring-data-neo4j.version>2.1.0.RELEASE</spring-data-neo4j.version>
 		<aspectj.version>1.6.12</aspectj.version>
 		<neo4j.version>1.8.RC1</neo4j.version>
 		<springwebflow-version>2.3.1.RELEASE</springwebflow-version>
-		<neo4j.kernel.version>1.7</neo4j.kernel.version>
-		<neo4j.cypher.version>1.7</neo4j.cypher.version>
 		<hibernate.validator.version>4.1.0.Final</hibernate.validator.version>
-		<cglib.version>2.2</cglib.version>
+
 
 	</properties>
 
@@ -166,6 +164,23 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate.validator.version}</version>
 		</dependency>
+
+		<!-- JSR 303 with Hibernate Validator -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>
+	
+		
+		<!-- Joda Time Library -->	
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
+
 
 		<dependency>
 			<groupId>junit</groupId>
