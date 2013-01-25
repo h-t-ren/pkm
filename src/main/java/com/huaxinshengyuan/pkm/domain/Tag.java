@@ -6,12 +6,15 @@ import org.neo4j.graphdb.Direction;
 import org.neo4j.helpers.collection.IteratorUtil;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.RelatedToVia;
+import org.springframework.data.neo4j.support.index.IndexType;
+
+
 
 @SuppressWarnings("serial")
-public class Tag extends KnowledgeNode {
+public class Tag extends PKMNode {
 
    
-	@Indexed  
+    @Indexed(indexName="tag",fieldName="tag",indexType=IndexType.FULLTEXT)
 	@Size(min=2,max=64) 
 	private String tag;
 	private Integer freq;

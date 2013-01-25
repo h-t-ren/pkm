@@ -43,8 +43,6 @@ script type="text/javascript" src="<c:url value="/resources/javascript/livesearc
 	});
 </script>
 <!-- /TinyMCE -->
-
-
   <script type="text/javascript">
     jQuery(function($)
     {
@@ -52,18 +50,13 @@ script type="text/javascript" src="<c:url value="/resources/javascript/livesearc
     });
   </script>
   
-  
-   <script type="text/javascript">
-   jQuery(function($)
-		    {
-$('#tags_autocomplete').autocomplete({
-	delimiter:/(,|;)\s*/,
-    lookup: 'andorra,china,你好'.split(','),
-   /* onSelect: function (suggestion) {
-        alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
-    }*/
-});
-		    });
+<script type="text/javascript">
+   jQuery(function($)    {
+     $('#tags_autocomplete').autocomplete({
+	    delimiter:/[,;，；]\s*/,
+        lookup: '${tags}'.split(',')
+      });
+	});
 </script>
  <style type="text/css"> 
 .autocomplete-suggestions { border: 1px solid #999; background: #FFF; cursor: default; overflow: auto; }

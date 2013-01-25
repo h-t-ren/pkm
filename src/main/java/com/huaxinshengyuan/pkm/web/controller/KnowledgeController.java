@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.huaxinshengyuan.pkm.domain.KnowledgeNode;
+import com.huaxinshengyuan.pkm.domain.Tag;
 import com.huaxinshengyuan.pkm.domain.User;
 import com.huaxinshengyuan.pkm.services.KnowledgeNodeService;
 import com.huaxinshengyuan.pkm.services.PkmUserDetailsService;
+import com.huaxinshengyuan.pkm.services.TagService;
 
 
 @Controller @RequestMapping(value = "/knowledge")
@@ -33,7 +35,7 @@ public class KnowledgeController {
 	@Autowired private PkmUserDetailsService userDetailsService;
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	@Value("#{prop['uploaded_file_path']}") private String filePath;
-	
+	@Autowired private TagService tagService;
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String populateDashboard(Model model) {
 		return "knowledge/dashboard";
@@ -41,6 +43,17 @@ public class KnowledgeController {
 	@RequestMapping(value = "/node/{nodeId}/edit", method = RequestMethod.GET)
 	public String populateKnowledgeForm(@PathVariable("nodeId") long nodeId, Model model) {
 		populateKnowledge(nodeId, model);
+		String tags="";
+		int i=0;
+		//temporary solution
+		for(Tag tag: tagService.findAllTags())
+		{
+			tags+=(i==0)?tag.getTag():","+tag.getTag();
+			i++;
+		}
+		
+		model.addAttribute("tags", tags);
+		
 		return "knowledgeNode/form";
 	}
 	@RequestMapping(value = "/node/{nodeId}/view", method = RequestMethod.GET)
@@ -84,7 +97,9 @@ public class KnowledgeController {
 			
 		}
 		knowledgeNodeService.save(knowledgeNode);
-		System.out.println("---knowledge id: " + knowledgeNode.getId());
+		log.debug("---knowledge id: " + knowledgeNode.getId());
+		
+		
 		return "redirect:/knowledge/dashboard";
 	}
 	

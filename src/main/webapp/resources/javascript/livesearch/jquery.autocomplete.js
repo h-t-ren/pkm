@@ -1,16 +1,3 @@
-/**
-*  Ajax Autocomplete for jQuery, version 1.2.3
-*  (c) 2013 Tomas Kirda
-*
-*  Ajax Autocomplete for jQuery is freely distributable under the terms of an MIT-style license.
-*  For details, see the web site: http://www.devbridge.com/projects/autocomplete/jquery/
-*
-*/
-
-/*jslint  browser: true, white: true, plusplus: true */
-/*global define, window, document, jQuery */
-
-// Expose plugin as an AMD module if AMD loader is present:
 (function (factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {

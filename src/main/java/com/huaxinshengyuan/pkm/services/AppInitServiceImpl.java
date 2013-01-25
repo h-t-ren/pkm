@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.huaxinshengyuan.pkm.domain.Group;
 import com.huaxinshengyuan.pkm.domain.Role;
+import com.huaxinshengyuan.pkm.domain.Tag;
 import com.huaxinshengyuan.pkm.domain.User;
 import com.huaxinshengyuan.pkm.domain.UserType;
 
@@ -17,7 +18,8 @@ public class AppInitServiceImpl implements AppInitService {
 	private UserService userService;
 	@Autowired
 	private GroupService groupService;
-	
+	@Autowired
+	private TagService tagService;
 	@Override @Transactional
 	public void initDb() {
 		createUsersAndGroups();
@@ -64,7 +66,21 @@ public class AppInitServiceImpl implements AppInitService {
 		userService.makeFriends(yangyang, hongtao);
 		userService.makeFriends(yangyang, tieju);
 		userService.makeFriends(yangyang, yifang);
-
+		
+		Tag tag =new Tag();
+		tag.setTag("hello");
+		tag.setFreq(0);
+		tagService.save(tag);
+		
+		Tag tag1 =new Tag();
+		tag1.setTag("你好 woshi");
+		tag1.setFreq(0);
+		tagService.save(tag1);
+		
+		Tag tag2 =new Tag();
+		tag2.setTag("hello world");
+		tag2.setFreq(0);
+		tagService.save(tag2);
 	}
 	
 	
