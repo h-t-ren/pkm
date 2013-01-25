@@ -377,6 +377,8 @@
         },
 
         getSuggestions: function (q) {
+        
+        	q=encodeURIComponent(q);
             var response,
                 that = this,
                 options = that.options;
@@ -595,7 +597,7 @@
                 return value;
             }
 
-            return currentValue.substr(0, currentValue.length - parts[parts.length - 1].length) + value;
+            return encodeURIComponent(currentValue.substr(0, currentValue.length - parts[parts.length - 1].length) + value);
         }
     };
 

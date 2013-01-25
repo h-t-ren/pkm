@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.huaxinshengyuan.pkm.domain.KnowledgeNode;
 import com.huaxinshengyuan.pkm.domain.Tag;
 import com.huaxinshengyuan.pkm.domain.User;
+import com.huaxinshengyuan.pkm.domain.json.Tags;
 import com.huaxinshengyuan.pkm.services.KnowledgeNodeService;
 import com.huaxinshengyuan.pkm.services.PkmUserDetailsService;
 import com.huaxinshengyuan.pkm.services.TagService;
@@ -30,7 +32,7 @@ import com.huaxinshengyuan.pkm.services.TagService;
 @Controller @RequestMapping(value = "/knowledge")
 @Transactional(readOnly=true)
 public class KnowledgeController {
-
+	
 	@Autowired private KnowledgeNodeService knowledgeNodeService;
 	@Autowired private PkmUserDetailsService userDetailsService;
 	private Logger log = LoggerFactory.getLogger(this.getClass());
@@ -46,14 +48,14 @@ public class KnowledgeController {
 		String tags="";
 		int i=0;
 		//temporary solution
-		for(Tag tag: tagService.findAllTags())
+		/*for(Tag tag: tagService.findAllTags())
 		{
 			tags+=(i==0)?tag.getTag():","+tag.getTag();
 			i++;
 		}
 		
 		model.addAttribute("tags", tags);
-		
+		*/
 		return "knowledgeNode/form";
 	}
 	@RequestMapping(value = "/node/{nodeId}/view", method = RequestMethod.GET)
@@ -116,5 +118,20 @@ public class KnowledgeController {
 		}
 		model.addAttribute("knowledgeNode", knowledgeNode);
 	}
-	
+	@RequestMapping(value="/tags", method=RequestMethod.GET, produces="application/json")
+	public @ResponseBody Tags findTags(
+			@RequestParam(value = "query", required = false) String query) {
+		
+		Tags tags = new Tags();
+		if(query==null)
+		{
+			
+		}
+		else
+		{
+			tags.setQuery(query);
+			tags.getSuggestions().addAll(tagService.findByQuery(query));
+		}
+			return tags;
+	}
 }

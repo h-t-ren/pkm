@@ -49,7 +49,7 @@ script type="text/javascript" src="<c:url value="/resources/javascript/livesearc
       $('#file_input').multifile();
     });
   </script>
-  
+ <!-- 
 <script type="text/javascript">
    jQuery(function($)    {
      $('#tags_autocomplete').autocomplete({
@@ -58,6 +58,20 @@ script type="text/javascript" src="<c:url value="/resources/javascript/livesearc
       });
 	});
 </script>
+ --> 
+ 
+ <script type="text/javascript">
+ var url = "${pageContext.request.contextPath}/knowledge/tags";
+ jQuery(function($)    {
+     $('#tags_autocomplete').autocomplete({
+    	    serviceUrl:url,
+    	    delimiter:/[,;，；]\s*/
+    	
+    	});
+	});
+</script>
+
+ 
  <style type="text/css"> 
 .autocomplete-suggestions { border: 1px solid #999; background: #FFF; cursor: default; overflow: auto; }
 .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }

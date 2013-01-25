@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.neo4j.conversion.EndResult;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,5 +32,13 @@ public class TagTest {
 	    		  log.debug("---------find: " + tag.getTag());
 	    	  }
 	    }
-	
+	    @Test
+	    public void findTags1()
+	    {
+	    	 EndResult<Tag> tags= tagRepository.findAllByQuery("tag", "tag", "*你*");
+			 for(Tag tag:tags)
+			 {
+				 log.debug("=================find: " + tag.getTag());
+			 }
+	    }
 }

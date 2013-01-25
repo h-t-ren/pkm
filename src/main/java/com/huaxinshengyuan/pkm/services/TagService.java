@@ -12,4 +12,5 @@ public interface TagService {
 	
 	public List<Tag> findAllTags();
 	public void save(Tag tag);
+	public List<String> findByQuery(String query);
 }
