@@ -14,7 +14,6 @@
 
 
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.multifile.js" />"></script>	
-<script type="text/javascript" src="<c:url value="/resources/javascript/showdown.js" />"></script>	
 
 <link rel="stylesheet" href="<c:url value="/resources/styles/blueprint/screen.css" />" type="text/css" media="screen, projection" />
 <link rel="stylesheet" href="<c:url value="/resources/styles/blueprint/print.css" />" type="text/css" media="print" />

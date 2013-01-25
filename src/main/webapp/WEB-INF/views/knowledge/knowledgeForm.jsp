@@ -1,5 +1,11 @@
+<%@page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<script type="text/javascript" src="<c:url value="/resources/javascript/livesearch/jquery.autocomplete.js" />"></script>
+<!--<<script type="text/javascript" src="<c:url value="/resources/javascript/livesearch/jquery.mockjax.js" />"></script>
+script type="text/javascript" src="<c:url value="/resources/javascript/livesearch/jquery.autocomplete.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/javascript/livesearch/selecttags.js" />"></script>	
+  -->
 <script type="text/javascript">
 	tinyMCE.init({
 		// General options
@@ -45,6 +51,26 @@
       $('#file_input').multifile();
     });
   </script>
+  
+  
+   <script type="text/javascript">
+   jQuery(function($)
+		    {
+$('#tags_autocomplete').autocomplete({
+	delimiter:/(,|;)\s*/,
+    lookup: 'andorra,china,你好'.split(','),
+   /* onSelect: function (suggestion) {
+        alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+    }*/
+});
+		    });
+</script>
+ <style type="text/css"> 
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; cursor: default; overflow: auto; }
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+ </style> 
 	<div class="header">
 			<c:if test="${not empty message}">
 				<div id="message" class="success"><pre><c:out escapeXml="true" value="${message}"/></pre></div>
@@ -56,8 +82,9 @@
 			 Title:<form:input path="name"  style="width: 85%"/>
 
 		</div>
-		 <div id="jquery-live-search">
-			 Tags: <input type="text" name="tags" style="width: 85%"/>
+		 <div>
+			 Tags: <input type="text" name="tags" id="tags_autocomplete" style="width: 85%;" autocomplete="off"/>
+			  <div id="suggestions-container" style="position: relative; width: 400px; margin: 10px;"></div>
 		</div>
 		 
 		   <div>
