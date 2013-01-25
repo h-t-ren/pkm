@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-<modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.huaxinshengyuan</groupId>
 	<artifactId>pkm</artifactId>
 	<version>1.0</version>
@@ -23,8 +23,8 @@
 			<timezone>+1</timezone>
 		</developer>
 	</developers>
-	
-<properties>
+
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>3.1.0.RELEASE</spring.version>
 		<spring.security-version>3.1.0.RELEASE</spring.security-version>
@@ -39,7 +39,7 @@
 	</properties>
 
 	<dependencies>
-	<!-- Spring dependencies -->
+		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -171,9 +171,9 @@
 			<artifactId>validation-api</artifactId>
 			<version>1.0.0.GA</version>
 		</dependency>
-	
-		
-		<!-- Joda Time Library -->	
+
+
+		<!-- Joda Time Library -->
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
@@ -282,14 +282,8 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- 
-			<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>jasper-el</artifactId>
-			<version>6.0.26</version>
-		</dependency>
-		
-		 -->
+		<!-- <dependency> <groupId>org.apache.tomcat</groupId> <artifactId>jasper-el</artifactId> 
+			<version>6.0.26</version> </dependency> -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
@@ -321,7 +315,7 @@
 	</dependencies>
 
 
-<repositories>
+	<repositories>
 		<repository>
 			<id>spring-maven-release</id>
 			<name>Spring Maven Release Repository</name>
@@ -413,42 +407,21 @@
 				<configuration>
 					<path>/pkm</path>
 					<port>8888</port>
+					<systemProperties>
+						<JAVA_OPTS>-Xms256m -Xmx512m -XX:MaxPermSize=256m</JAVA_OPTS>
+					</systemProperties>
 				</configuration>
 
 			</plugin>
-			
-			<!--  
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>7.6.5.v20120716</version>
-				<configuration>
-					<scanIntervalSeconds>10</scanIntervalSeconds>
-					<stopKey>foo</stopKey>
-					<stopPort>9999</stopPort>
-				</configuration>
-				<executions>
-					<execution>
-						<id>start-jetty</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<scanIntervalSeconds>0</scanIntervalSeconds>
-							<daemon>true</daemon>
-						</configuration>
-					</execution>
-					<execution>
-						<id>stop-jetty</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			-->
+
+			<!-- <plugin> <groupId>org.mortbay.jetty</groupId> <artifactId>jetty-maven-plugin</artifactId> 
+				<version>7.6.5.v20120716</version> <configuration> <scanIntervalSeconds>10</scanIntervalSeconds> 
+				<stopKey>foo</stopKey> <stopPort>9999</stopPort> </configuration> <executions> 
+				<execution> <id>start-jetty</id> <phase>pre-integration-test</phase> <goals> 
+				<goal>run</goal> </goals> <configuration> <scanIntervalSeconds>0</scanIntervalSeconds> 
+				<daemon>true</daemon> </configuration> </execution> <execution> <id>stop-jetty</id> 
+				<phase>post-integration-test</phase> <goals> <goal>stop</goal> </goals> </execution> 
+				</executions> </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -471,8 +444,18 @@
 					</additionalProjectnatures>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<forkMode>once</forkMode>
+					<argLine>-Xms512m -Xmx1024m</argLine>
+				</configuration>
+			</plugin>
 		</plugins>
-			
+
 	</build>
 
 

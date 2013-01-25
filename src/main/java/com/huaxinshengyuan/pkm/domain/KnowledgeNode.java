@@ -15,8 +15,8 @@ import org.springframework.data.neo4j.support.index.IndexType;
 @XmlRootElement(name="knowledgeNode")
 public class KnowledgeNode extends PKMNode {
 	
-	@Indexed(unique=true,indexName="knowledgeNode",indexType=IndexType.FULLTEXT) private String name;
-    @Indexed(indexName="knowledgeNode",indexType=IndexType.FULLTEXT) private String description;
+	@Indexed(indexName="knowledgeNode",fieldName="name", indexType=IndexType.FULLTEXT) private String name;
+    @Indexed(indexName="knowledgeNode",fieldName="description", indexType=IndexType.FULLTEXT) private String description;
     private String note;
     private Integer star;
     private Date created;
