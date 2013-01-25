@@ -21,7 +21,7 @@ public class TagServiceImpl implements TagService {
 		TagSimilarity tagSimilarity =template.createRelationshipBetween(t1, t2, TagSimilarity.class, RelationType.TagSimilarity, false);
 		tagSimilarity.setSimilarity(similarity);
 		template.save(tagSimilarity);
-
+		
 	}
 
 	@Override

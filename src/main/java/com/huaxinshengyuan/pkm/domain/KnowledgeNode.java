@@ -9,13 +9,14 @@ import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.RelatedTo;
 import org.springframework.data.neo4j.annotation.RelatedToVia;
 import org.springframework.data.neo4j.fieldaccess.DynamicProperties;
+import org.springframework.data.neo4j.support.index.IndexType;
 
 @SuppressWarnings("serial")
 @XmlRootElement(name="knowledgeNode")
 public class KnowledgeNode extends PKMNode {
 	
-	@Indexed(unique=true) private String name;
-	private String description;
+	@Indexed(unique=true,indexName="knowledgeNode",indexType=IndexType.FULLTEXT) private String name;
+    @Indexed(indexName="knowledgeNode",indexType=IndexType.FULLTEXT) private String description;
     private String note;
     private Integer star;
     private Date created;
