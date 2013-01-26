@@ -378,7 +378,6 @@
 
         getSuggestions: function (q) {
         
-        	q=encodeURIComponent(q);
             var response,
                 that = this,
                 options = that.options;
@@ -395,7 +394,8 @@
                     url: options.serviceUrl,
                     data: options.params,
                     type: options.type,
-                    dataType: 'text'
+                    dataType: 'text',
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                 }).done(function (txt) {
                     that.processResponse(txt);
                     options.onSearchComplete.call(that.element, q);
@@ -597,7 +597,7 @@
                 return value;
             }
 
-            return encodeURIComponent(currentValue.substr(0, currentValue.length - parts[parts.length - 1].length) + value);
+            return currentValue.substr(0, currentValue.length - parts[parts.length - 1].length) + value;
         }
     };
 

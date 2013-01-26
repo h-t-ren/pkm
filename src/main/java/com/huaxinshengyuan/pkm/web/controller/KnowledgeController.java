@@ -1,14 +1,13 @@
 package com.huaxinshengyuan.pkm.web.controller;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -19,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.huaxinshengyuan.pkm.domain.KnowledgeNode;
-import com.huaxinshengyuan.pkm.domain.Tag;
 import com.huaxinshengyuan.pkm.domain.User;
 import com.huaxinshengyuan.pkm.domain.json.Tags;
 import com.huaxinshengyuan.pkm.services.KnowledgeNodeService;
@@ -45,10 +42,12 @@ public class KnowledgeController {
 	@RequestMapping(value = "/node/{nodeId}/edit", method = RequestMethod.GET)
 	public String populateKnowledgeForm(@PathVariable("nodeId") long nodeId, Model model) {
 		populateKnowledge(nodeId, model);
-		String tags="";
-		int i=0;
+
 		//temporary solution
-		/*for(Tag tag: tagService.findAllTags())
+		/*String tags="";
+		int i=0;
+		
+		for(Tag tag: tagService.findAllTags())
 		{
 			tags+=(i==0)?tag.getTag():","+tag.getTag();
 			i++;
@@ -100,8 +99,6 @@ public class KnowledgeController {
 		}
 		knowledgeNodeService.save(knowledgeNode);
 		log.debug("---knowledge id: " + knowledgeNode.getId());
-		
-		
 		return "redirect:/knowledge/dashboard";
 	}
 	
@@ -118,20 +115,5 @@ public class KnowledgeController {
 		}
 		model.addAttribute("knowledgeNode", knowledgeNode);
 	}
-	@RequestMapping(value="/tags", method=RequestMethod.GET, produces="application/json")
-	public @ResponseBody Tags findTags(
-			@RequestParam(value = "query", required = false) String query) {
-		
-		Tags tags = new Tags();
-		if(query==null)
-		{
-			
-		}
-		else
-		{
-			tags.setQuery(query);
-			tags.getSuggestions().addAll(tagService.findByQuery(query));
-		}
-			return tags;
-	}
+	
 }

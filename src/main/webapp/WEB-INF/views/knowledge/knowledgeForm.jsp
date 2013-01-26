@@ -61,7 +61,7 @@ script type="text/javascript" src="<c:url value="/resources/javascript/livesearc
  --> 
  
  <script type="text/javascript">
- var url = "${pageContext.request.contextPath}/knowledge/tags";
+ var url = "${pageContext.request.contextPath}/tag/json";
  jQuery(function($)    {
      $('#tags_autocomplete').autocomplete({
     	    serviceUrl:url,
