@@ -35,8 +35,17 @@ public class TagServiceImpl implements TagService {
 
 	@Override @Transactional
 	public void save(Tag tag) {
-		tagRepository.save(tag);
-		
+		Tag t =findTag(tag.getTag());
+		if(t==null)
+		{
+			tagRepository.save(tag);
+		}
+		else
+		{
+			t.setFreq(t.getFreq()+1);
+			tagRepository.save(tag);
+		}
+
 	}
 
 	@Override
@@ -47,7 +56,13 @@ public class TagServiceImpl implements TagService {
 		 {
 			 lst.add(tag.getTag());
 		 }
+		
 		return lst;
+	}
+
+	@Override
+	public Tag findTag(String tag) {
+		 return tagRepository.findByPropertyValue("tag", tag);
 	}
 	
 

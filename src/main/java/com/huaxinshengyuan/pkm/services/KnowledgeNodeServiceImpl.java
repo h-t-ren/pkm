@@ -44,7 +44,7 @@ public class KnowledgeNodeServiceImpl implements KnowledgeNodeService {
 
 	@Override
 	public EndResult<KnowledgeNode> findAllbyQuery(String query) {
-		return knowledgeNodeRepository.findAllByQuery("knowledgeNode", "name:*"+query+"* OR description:*"+query+"*");
+		return knowledgeNodeRepository.findAllByQuery("knowledgeNode", "name:*"+query+"* OR description:*"+query+"*"+"* OR note:*"+query+"*");
 		
 	}
 

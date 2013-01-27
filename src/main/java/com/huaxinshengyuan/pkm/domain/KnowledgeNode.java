@@ -17,7 +17,7 @@ public class KnowledgeNode extends PKMNode {
 	
 	@Indexed(indexName="knowledgeNode",fieldName="name", indexType=IndexType.FULLTEXT) private String name;
     @Indexed(indexName="knowledgeNode",fieldName="description", indexType=IndexType.FULLTEXT) private String description;
-    private String note;
+    @Indexed(indexName="knowledgeNode",fieldName="note", indexType=IndexType.FULLTEXT) private String note;
     private Integer star;
     private Date created;
     private Date lastModified;

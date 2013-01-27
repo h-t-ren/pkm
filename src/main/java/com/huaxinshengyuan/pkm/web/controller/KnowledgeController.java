@@ -70,6 +70,8 @@ public class KnowledgeController {
 			@RequestParam(value = "cancel", required = false) String cancel,
 			@PathVariable("nodeId") long nodeId,
 			@ModelAttribute KnowledgeNode knowledgeNode,
+			@RequestParam(value="tags", required=false) String tags,
+			@RequestParam(value="importance", required=false) int importance,
 			@RequestParam(value="files[]", required=false) MultipartFile[] files,
 			Model model)throws Exception {
 		if (cancel != null) {
@@ -97,8 +99,8 @@ public class KnowledgeController {
 			}
 			
 		}
-		knowledgeNodeService.save(knowledgeNode);
-		log.debug("---knowledge id: " + knowledgeNode.getId());
+		//knowledgeNodeService.save(knowledgeNode);
+		log.debug("---knowledge id: " + knowledgeNode.getId() +", inportance: " + importance);
 		return "redirect:/knowledge/dashboard";
 	}
 	

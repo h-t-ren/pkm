@@ -12,6 +12,8 @@
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.form.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.dataTables.js" />"></script>	
 
+<script type="text/javascript" src="<c:url value="/resources/javascript/star/jquery.rateit.js" />"></script>
+<link href="<c:url value="/resources/javascript/star/rateit.css"/>" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.multifile.js" />"></script>	
 

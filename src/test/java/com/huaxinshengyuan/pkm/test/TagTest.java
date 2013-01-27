@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import com.huaxinshengyuan.pkm.domain.Tag;
 import com.huaxinshengyuan.pkm.repository.TagRepository;
+import com.huaxinshengyuan.pkm.services.TagService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,6 +23,7 @@ public class TagTest {
 	    private Logger log = LoggerFactory.getLogger(this.getClass());
 	 
 	    @Autowired private TagRepository tagRepository;
+	    @Autowired private TagService tagService;
 
 	    @Test
 	    public void findTags()
@@ -39,6 +41,17 @@ public class TagTest {
 			 for(Tag tag:tags)
 			 {
 				 log.debug("=================find: " + tag.getTag());
+			 }
+	    }
+	    
+	    
+	    @Test
+	    public void findTags2()
+	    {
+	    	 Tag tag=tagService.findTag("hello");
+			 if(tag!=null)
+			 {
+				 log.debug("=================find tag: " + tag.getTag());
 			 }
 	    }
 }
