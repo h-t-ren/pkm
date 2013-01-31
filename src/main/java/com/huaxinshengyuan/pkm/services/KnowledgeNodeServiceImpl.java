@@ -1,6 +1,5 @@
 package com.huaxinshengyuan.pkm.services;
 
-import org.apache.commons.configuration.ConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.neo4j.template.Neo4jOperations;
 import org.springframework.stereotype.Service;
@@ -35,7 +34,6 @@ public class KnowledgeNodeServiceImpl implements KnowledgeNodeService {
 		template.save(knowledgeTag);
 		tag.setFreq(tag.getFreq()+1);
 		template.save(tag);
-		
 	}
 
 	@Override
