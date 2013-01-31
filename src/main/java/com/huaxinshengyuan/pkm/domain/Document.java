@@ -5,7 +5,7 @@ import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.RelatedTo;
 
 @SuppressWarnings("serial")
-public class Document extends KnowledgeNode {
+public class Document extends PKMNode {
 	
 	private Date created;
 	private String fileName;

@@ -18,7 +18,7 @@ public class KnowledgeNode extends PKMNode {
 	@Indexed(indexName="knowledgeNode",fieldName="name", indexType=IndexType.FULLTEXT) private String name;
     @Indexed(indexName="knowledgeNode",fieldName="description", indexType=IndexType.FULLTEXT) private String description;
     @Indexed(indexName="knowledgeNode",fieldName="note", indexType=IndexType.FULLTEXT) private String note;
-    private Integer star;
+    private Integer importance;
     private Date created;
     private Date lastModified;
     @RelatedTo(type=RelationType.UserOwnedKnowledge, direction = Direction.INCOMING)@Fetch
@@ -67,12 +67,6 @@ public class KnowledgeNode extends PKMNode {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Integer getStar() {
-		return star;
-	}
-	public void setStar(Integer star) {
-		this.star = star;
-	}
 	public String getNote() {
 		return note;
 	}
@@ -99,6 +93,12 @@ public class KnowledgeNode extends PKMNode {
 	}
 	public Collection<KnowledgeTag> getKnowledgeTags() {
 		return IteratorUtil.asCollection(knowledgeTags);
+	}
+	public Integer getImportance() {
+		return importance;
+	}
+	public void setImportance(Integer importance) {
+		this.importance = importance;
 	}
 
 }

@@ -81,7 +81,7 @@
 			</c:if>
 		</div>
 <form:form modelAttribute="knowledgeNode" enctype="multipart/form-data">
-	<div>
+<div>
 	    <div>
 			 Title:<form:input path="name"  style="width: 85%"/>
 
@@ -92,8 +92,8 @@
 		</div>
 		    <div>
 			 Importance:<input type="range" min="0" max="5" value="0" step="1" id="star" name="importance">
-            <div class="rateit" data-rateit-backingfld="#star">
-		</div>
+            <div class="rateit" data-rateit-backingfld="#star"></div>
+            </div>
 		   <div>
 			 URL: <form:input path="url"  style="width: 85%" />
 		</div>

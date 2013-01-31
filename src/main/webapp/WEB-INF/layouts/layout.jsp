@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>PKM</title>
 <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js" djConfig="parseOnLoad: true"> </script>
-<<script type="text/javascript" src="<c:url value="/resources/javascript/jquery-latest.js" />"></script>	
+<script type="text/javascript" src="<c:url value="/resources/javascript/jquery-latest.js" />"></script>	
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.form.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.dataTables.js" />"></script>	
 
