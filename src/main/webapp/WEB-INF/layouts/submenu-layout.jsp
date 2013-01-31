@@ -17,7 +17,8 @@
 <script type="text/javascript" src="<c:url value="/resources/javascript/tiny_mce/tiny_mce.js" />"></script>	
 
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.multifile.js" />"></script>	
-
+<script type="text/javascript" src="<c:url value="/resources/javascript/star/jquery.rateit.js" />"></script>
+<link href="<c:url value="/resources/javascript/star/rateit.css"/>" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="<c:url value="/resources/styles/blueprint/screen.css" />" type="text/css" media="screen, projection" />
 <link rel="stylesheet" href="<c:url value="/resources/styles/blueprint/print.css" />" type="text/css" media="print" />
 <!--[if lt IE 8]>
@@ -58,7 +59,7 @@
 		,	south__spacing_closed:		21		// big resizer-bar when open (zero height)
 
 		//	some pane-size settings
-		,	west__minSize:				400
+		,	west__minSize:				250
 		,	center__minWidth:			500
 
 		//	some pane animation settings
@@ -69,7 +70,7 @@
 		,	west__fxName_close:			"none"	// NO animation when closing west-pane
 
 		});
-		myLayout.sizePane("west", 440);
+		myLayout.sizePane("west", 250);
 		myLayout.sizePane("south", 16);
 
  	});

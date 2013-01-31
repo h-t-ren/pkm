@@ -14,6 +14,7 @@ import com.huaxinshengyuan.pkm.domain.User;
 import com.huaxinshengyuan.pkm.services.UserService;
 
 @Controller @RequestMapping(value = "/user")
+@Transactional(readOnly=true)
 public class UserController {
 
 	@Autowired private UserService userService;

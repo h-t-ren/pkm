@@ -18,7 +18,7 @@ import com.huaxinshengyuan.pkm.services.AppInitService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext.xml")
 @Transactional
-public class UserlTest {
+public class AppTest {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	 
 	    @Autowired private AppInitService appInitService;

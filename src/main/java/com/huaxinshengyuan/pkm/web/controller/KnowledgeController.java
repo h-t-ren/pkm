@@ -1,14 +1,13 @@
 package com.huaxinshengyuan.pkm.web.controller;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -17,11 +16,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.huaxinshengyuan.pkm.domain.KnowledgeNode;
-import com.huaxinshengyuan.pkm.domain.Tag;
 import com.huaxinshengyuan.pkm.domain.User;
+import com.huaxinshengyuan.pkm.domain.json.Tags;
 import com.huaxinshengyuan.pkm.services.KnowledgeNodeService;
 import com.huaxinshengyuan.pkm.services.PkmUserDetailsService;
 import com.huaxinshengyuan.pkm.services.TagService;
@@ -30,7 +29,7 @@ import com.huaxinshengyuan.pkm.services.TagService;
 @Controller @RequestMapping(value = "/knowledge")
 @Transactional(readOnly=true)
 public class KnowledgeController {
-
+	
 	@Autowired private KnowledgeNodeService knowledgeNodeService;
 	@Autowired private PkmUserDetailsService userDetailsService;
 	private Logger log = LoggerFactory.getLogger(this.getClass());
@@ -43,9 +42,11 @@ public class KnowledgeController {
 	@RequestMapping(value = "/node/{nodeId}/edit", method = RequestMethod.GET)
 	public String populateKnowledgeForm(@PathVariable("nodeId") long nodeId, Model model) {
 		populateKnowledge(nodeId, model);
-		String tags="";
-		int i=0;
+
 		//temporary solution
+		/*String tags="";
+		int i=0;
+		
 		for(Tag tag: tagService.findAllTags())
 		{
 			tags+=(i==0)?tag.getTag():","+tag.getTag();
@@ -53,7 +54,7 @@ public class KnowledgeController {
 		}
 		
 		model.addAttribute("tags", tags);
-		
+		*/
 		return "knowledgeNode/form";
 	}
 	@RequestMapping(value = "/node/{nodeId}/view", method = RequestMethod.GET)
@@ -69,6 +70,8 @@ public class KnowledgeController {
 			@RequestParam(value = "cancel", required = false) String cancel,
 			@PathVariable("nodeId") long nodeId,
 			@ModelAttribute KnowledgeNode knowledgeNode,
+			@RequestParam(value="tags", required=false) String tags,
+			@RequestParam(value="importance", required=false) int importance,
 			@RequestParam(value="files[]", required=false) MultipartFile[] files,
 			Model model)throws Exception {
 		if (cancel != null) {
@@ -96,10 +99,8 @@ public class KnowledgeController {
 			}
 			
 		}
-		knowledgeNodeService.save(knowledgeNode);
-		log.debug("---knowledge id: " + knowledgeNode.getId());
-		
-		
+		//knowledgeNodeService.save(knowledgeNode);
+		log.debug("---knowledge id: " + knowledgeNode.getId() +", inportance: " + importance);
 		return "redirect:/knowledge/dashboard";
 	}
 	

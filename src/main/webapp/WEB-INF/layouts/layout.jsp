@@ -8,10 +8,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>PKM</title>
 <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js" djConfig="parseOnLoad: true"> </script>
-<script type="text/javascript" src="<c:url value="http://code.jquery.com/jquery-1.7.1.min.js" />"></script>
+<<script type="text/javascript" src="<c:url value="/resources/javascript/jquery-latest.js" />"></script>	
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.form.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.dataTables.js" />"></script>	
 
+<script type="text/javascript" src="<c:url value="/resources/javascript/star/jquery.rateit.js" />"></script>
+<link href="<c:url value="/resources/javascript/star/rateit.css"/>" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.multifile.js" />"></script>	
 

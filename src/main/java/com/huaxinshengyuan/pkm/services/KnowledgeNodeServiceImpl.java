@@ -1,6 +1,7 @@
 package com.huaxinshengyuan.pkm.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.neo4j.conversion.EndResult;
 import org.springframework.data.neo4j.template.Neo4jOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +40,12 @@ public class KnowledgeNodeServiceImpl implements KnowledgeNodeService {
 	@Override
 	public KnowledgeNode find(long id) {
 		return knowledgeNodeRepository.findOne(id);
+	}
+
+	@Override
+	public EndResult<KnowledgeNode> findAllbyQuery(String query) {
+		return knowledgeNodeRepository.findAllByQuery("knowledgeNode", "name:*"+query+"* OR description:*"+query+"*"+"* OR note:*"+query+"*");
+		
 	}
 
 

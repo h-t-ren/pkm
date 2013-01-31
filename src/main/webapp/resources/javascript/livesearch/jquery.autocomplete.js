@@ -377,6 +377,7 @@
         },
 
         getSuggestions: function (q) {
+        
             var response,
                 that = this,
                 options = that.options;
@@ -393,7 +394,8 @@
                     url: options.serviceUrl,
                     data: options.params,
                     type: options.type,
-                    dataType: 'text'
+                    dataType: 'text',
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                 }).done(function (txt) {
                     that.processResponse(txt);
                     options.onSearchComplete.call(that.element, q);
