@@ -87,11 +87,11 @@
 
 		</div>
 		 <div>
-			 Tags: <input type="text" name="tags" id="tags_autocomplete" style="width: 85%;" autocomplete="off"/>
+			 Tags: <input type="text" name="tags" id="tags_autocomplete" style="width: 85%;" autocomplete="off" value="${tags}"/>
 			  <div id="suggestions-container" style="position: relative; width: 400px; margin: 10px;"></div>
 		</div>
 		    <div>
-			 Importance:<input type="range" min="0" max="5" value="0" step="1" id="star" name="importance">
+			 Importance:<input type="range" min="0" max="5" value="${knowledgeNode.importance}" step="1" id="star" name="importance">
             <div class="rateit" data-rateit-backingfld="#star"></div>
             </div>
 		   <div>

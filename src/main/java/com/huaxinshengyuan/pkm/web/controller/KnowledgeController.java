@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.huaxinshengyuan.pkm.domain.Document;
 import com.huaxinshengyuan.pkm.domain.KnowledgeNode;
+import com.huaxinshengyuan.pkm.domain.KnowledgeTag;
 import com.huaxinshengyuan.pkm.domain.Tag;
 import com.huaxinshengyuan.pkm.domain.User;
 import com.huaxinshengyuan.pkm.repository.DocumentRepository;
@@ -130,7 +131,7 @@ public class KnowledgeController {
 			}
 
 		}
-		if(tags!=null)
+		if(tags!=null&&!tags.isEmpty())
 		{
 			String tag[] = tags.split(",|;|，");
 			int seq=1;
@@ -160,7 +161,18 @@ public class KnowledgeController {
 		} else {
 			knowledgeNode = knowledgeNodeService.find(nodeId);
 		}
+		String tags="";
+		if(knowledgeNode.getKnowledgeTags()!=null)
+		{
+			int i=0;
+			for(KnowledgeTag kt:knowledgeNode.getKnowledgeTags())
+			{
+				tags = (i==0)? tags+kt.getTag().getTag():tags+"," +kt.getTag().getTag();
+			    i++;
+			}
+		}
 		model.addAttribute("knowledgeNode", knowledgeNode);
+		model.addAttribute("tags", tags);
 	}
 
 	

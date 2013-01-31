@@ -18,7 +18,7 @@ public class KnowledgeNode extends PKMNode {
 	@Indexed(indexName="knowledgeNode",fieldName="name", indexType=IndexType.FULLTEXT) private String name;
     @Indexed(indexName="knowledgeNode",fieldName="description", indexType=IndexType.FULLTEXT) private String description;
     @Indexed(indexName="knowledgeNode",fieldName="note", indexType=IndexType.FULLTEXT) private String note;
-    private Integer importance;
+    private Integer importance=0;
     private Date created;
     private Date lastModified;
     @RelatedTo(type=RelationType.UserOwnedKnowledge, direction = Direction.INCOMING)@Fetch
@@ -92,6 +92,8 @@ public class KnowledgeNode extends PKMNode {
 		this.dyn = dyn;
 	}
 	public Collection<KnowledgeTag> getKnowledgeTags() {
+		if(knowledgeTags==null)
+			return  null;
 		return IteratorUtil.asCollection(knowledgeTags);
 	}
 	public Integer getImportance() {
