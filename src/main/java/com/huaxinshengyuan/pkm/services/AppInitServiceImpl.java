@@ -68,17 +68,17 @@ public class AppInitServiceImpl implements AppInitService {
 		userService.makeFriends(yangyang, yifang);
 		
 		Tag tag =new Tag();
-		tag.setTag("hello");
+		tag.setTag("华东理工大学");
 		tag.setFreq(0);
 		tagService.save(tag);
 		
 		Tag tag1 =new Tag();
-		tag1.setTag("你好 woshi");
+		tag1.setTag("IIASA");
 		tag1.setFreq(0);
 		tagService.save(tag1);
 		
 		Tag tag2 =new Tag();
-		tag2.setTag("hello world");
+		tag2.setTag("宏涛账户");
 		tag2.setFreq(0);
 		tagService.save(tag2);
 	}

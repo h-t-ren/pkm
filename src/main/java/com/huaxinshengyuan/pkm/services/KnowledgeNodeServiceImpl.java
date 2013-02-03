@@ -6,6 +6,7 @@ import org.springframework.data.neo4j.template.Neo4jOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.huaxinshengyuan.pkm.domain.FieldIndex;
 import com.huaxinshengyuan.pkm.domain.KnowledgeNode;
 import com.huaxinshengyuan.pkm.domain.KnowledgeTag;
 import com.huaxinshengyuan.pkm.domain.RelationType;
@@ -22,6 +23,7 @@ public class KnowledgeNodeServiceImpl implements KnowledgeNodeService {
 	
 	@Override @Transactional
 	public void save(KnowledgeNode knowledgeNode) {
+		//System.out.println("------------save knowledge: ");
 		knowledgeNodeRepository.save(knowledgeNode);
 
 	}
@@ -44,7 +46,7 @@ public class KnowledgeNodeServiceImpl implements KnowledgeNodeService {
 
 	@Override
 	public EndResult<KnowledgeNode> findAllbyQuery(String query) {
-		return knowledgeNodeRepository.findAllByQuery("knowledgeNode", "name:*"+query+"* OR description:*"+query+"*"+"* OR note:*"+query+"*");
+		return knowledgeNodeRepository.findAllByQuery(FieldIndex.knowledgeNode, "name:*"+query+"* OR description:*"+query+"*"+"* OR note:*"+query+"*");
 		
 	}
 

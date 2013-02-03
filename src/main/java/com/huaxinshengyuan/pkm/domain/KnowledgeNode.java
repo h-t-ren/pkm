@@ -1,5 +1,6 @@
 package com.huaxinshengyuan.pkm.domain;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.neo4j.graphdb.Direction;
@@ -15,18 +16,20 @@ import org.springframework.data.neo4j.support.index.IndexType;
 @XmlRootElement(name="knowledgeNode")
 public class KnowledgeNode extends PKMNode {
 	
-	@Indexed(indexName="knowledgeNode",fieldName="name", indexType=IndexType.FULLTEXT) private String name;
-    @Indexed(indexName="knowledgeNode",fieldName="description", indexType=IndexType.FULLTEXT) private String description;
-    @Indexed(indexName="knowledgeNode",fieldName="note", indexType=IndexType.FULLTEXT) private String note;
+	@Indexed(indexName=FieldIndex.knowledgeNode,fieldName="name", indexType=IndexType.FULLTEXT) private String name;
+    @Indexed(indexName=FieldIndex.knowledgeNode,fieldName="description", indexType=IndexType.FULLTEXT) private String description;
+    @Indexed(indexName=FieldIndex.knowledgeNode,fieldName="note", indexType=IndexType.FULLTEXT) private String note;
     private Integer importance=0;
     private Date created;
     private Date lastModified;
     @RelatedTo(type=RelationType.UserOwnedKnowledge, direction = Direction.INCOMING)@Fetch
     private User user;
-	@RelatedTo(type=RelationType.UserModifyKnowledgen, direction = Direction.INCOMING)@Fetch
+	@RelatedTo(type=RelationType.UserModifyKnowledge, direction = Direction.INCOMING)@Fetch
     private User modifier;
-	@RelatedToVia(elementClass = KnowledgeTag.class, type = RelationType.KnowledgeHasTag, direction = Direction.OUTGOING)
+	@RelatedToVia(elementClass = KnowledgeTag.class, type = RelationType.KnowledgeHasTag, direction = Direction.OUTGOING)@Fetch
 	private Iterable<KnowledgeTag> knowledgeTags;
+	@RelatedTo(type=RelationType.KnowledgeHasDocument, direction = Direction.OUTGOING)@Fetch
+	private Iterable<Document> documents;
 	private String url;
 	private DynamicProperties dyn;
 	public User getUser() {
@@ -91,16 +94,19 @@ public class KnowledgeNode extends PKMNode {
 	public void setDyn(DynamicProperties dyn) {
 		this.dyn = dyn;
 	}
-	public Collection<KnowledgeTag> getKnowledgeTags() {
-		if(knowledgeTags==null)
-			return  null;
-		return IteratorUtil.asCollection(knowledgeTags);
-	}
+
 	public Integer getImportance() {
 		return importance;
 	}
 	public void setImportance(Integer importance) {
 		this.importance = importance;
 	}
-
+	public Collection<KnowledgeTag> getKnowledgeTags() {
+	    Iterable<KnowledgeTag> allTagss = knowledgeTags;
+        return allTagss == null ? Collections.<KnowledgeTag>emptyList() : IteratorUtil.asCollection(allTagss);
+	}
+	public Collection<Document> getDocuments() {
+	    Iterable<Document> ds = documents;
+        return ds == null ? Collections.<Document>emptyList() : IteratorUtil.asCollection(ds);
+	}
 }

@@ -13,10 +13,10 @@
 	<neo4j:repositories base-package="com.huaxinshengyuan.pkm.repository" />
 
     <!-- Embedded -->
-	<!--<neo4j:config storeDirectory="${graph.db.location}" />-->
+	<neo4j:config storeDirectory="${graph.db.location}" />
 	
 	
-     <neo4j:config storeDirectory="target/graph.db"/>
+   <!--  <neo4j:config storeDirectory="target/graph.db"/>-->
     
 	<!-- REST -->
 	<!-- 

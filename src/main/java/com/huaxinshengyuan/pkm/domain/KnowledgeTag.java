@@ -1,12 +1,13 @@
 package com.huaxinshengyuan.pkm.domain;
 
 import org.springframework.data.neo4j.annotation.EndNode;
+import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.StartNode;
 @SuppressWarnings("serial")
 public class KnowledgeTag extends PKMRelation{
 
 	@StartNode private KnowledgeNode knowledgeNode;
-	@EndNode private Tag tag;
+	@Fetch @EndNode private Tag tag;
 	private int seq;
 	private float importance;
 

@@ -14,7 +14,9 @@
    
     
      <!-- Embedded -->
-    <neo4j:config storeDirectory="target/graph.db" />
+   <!--   <neo4j:config storeDirectory="target/graph.db" />-->
+    <neo4j:config storeDirectory="/home/hongtao/huaxinshengyuan/pkm/graph.db" />
+    
     <context:component-scan base-package="com.huaxinshengyuan.pkm.services"/>
     <neo4j:repositories base-package="com.huaxinshengyuan.pkm.repository"/>
 	<tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/>

@@ -29,9 +29,11 @@ import com.huaxinshengyuan.pkm.domain.KnowledgeTag;
 import com.huaxinshengyuan.pkm.domain.Tag;
 import com.huaxinshengyuan.pkm.domain.User;
 import com.huaxinshengyuan.pkm.repository.DocumentRepository;
+import com.huaxinshengyuan.pkm.repository.KnowledgeNodeRepository;
 import com.huaxinshengyuan.pkm.services.KnowledgeNodeService;
 import com.huaxinshengyuan.pkm.services.PkmUserDetailsService;
 import com.huaxinshengyuan.pkm.services.TagService;
+import com.huaxinshengyuan.pkm.services.UserService;
 
 @Controller
 @RequestMapping(value = "/knowledge")
@@ -41,6 +43,8 @@ public class KnowledgeController {
 	@Autowired
 	private KnowledgeNodeService knowledgeNodeService;
 	@Autowired
+	private KnowledgeNodeRepository knowledgeNodeRepository;
+	@Autowired
 	private PkmUserDetailsService userDetailsService;
 	@Autowired
 	private DocumentRepository documentRepository;
@@ -49,9 +53,13 @@ public class KnowledgeController {
 	private String filePath;
 	@Autowired
 	private TagService tagService;
-
+	@Autowired
+	private UserService userService;
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String populateDashboard(Model model) {
+		User user = userDetailsService.getUserFromSession();
+		List<KnowledgeNode> nodes =knowledgeNodeRepository.findKnowledgeNodes(user);
+		model.addAttribute("knowledgeNodes", nodes);
 		return "knowledge/dashboard";
 	}
 
@@ -83,7 +91,7 @@ public class KnowledgeController {
 	@Transactional
 	public String saveKnowledge(
 			@RequestParam(value = "save", required = false) String save,
-			@RequestParam(value = "cancel", required = false) String cancel,
+			@RequestParam(value = "_cancel", required = false) String cancel,
 			@PathVariable("nodeId") long nodeId,
 			@ModelAttribute KnowledgeNode knowledgeNode,
 			@RequestParam(value = "tags", required = false) String tags,
@@ -97,7 +105,7 @@ public class KnowledgeController {
 		User user = userDetailsService.getUserFromSession();
 		if (nodeId != -1) // modify existing knowledge node
 		{
-			knowledgeNode.setId(nodeId);
+			knowledgeNode =knowledgeNodeService.find(nodeId);
 			knowledgeNode.setLastModified(new Date());
 			knowledgeNode.setModifier(user);
 		} else // create new knowledge node
@@ -146,11 +154,10 @@ public class KnowledgeController {
 				}
 				tagService.save(tg);
 				knowledgeNodeService.addTag(knowledgeNode, tg, seq, 3);
+				userService.addTag(user, tg);
 			    seq++;
 			}
 		}
-		log.debug("---knowledge id: " + knowledgeNode.getId()
-				+ ", inportance: " + importance);
 		return "redirect:/knowledge/dashboard";
 	}
 
@@ -164,6 +171,7 @@ public class KnowledgeController {
 		String tags="";
 		if(knowledgeNode.getKnowledgeTags()!=null)
 		{
+			log.debug("--------- tags:" +knowledgeNode.getKnowledgeTags().size());
 			int i=0;
 			for(KnowledgeTag kt:knowledgeNode.getKnowledgeTags())
 			{

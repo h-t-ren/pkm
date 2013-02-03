@@ -1,9 +1,12 @@
 package com.huaxinshengyuan.pkm.domain;
 
 import java.util.Collection;
+import java.util.Collections;
+
 import javax.validation.constraints.Size;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.helpers.collection.IteratorUtil;
+import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.RelatedToVia;
 import org.springframework.data.neo4j.support.index.IndexType;
@@ -16,7 +19,7 @@ public class Tag extends PKMNode {
    
     @Indexed(indexName="tag",fieldName="tag",indexType=IndexType.FULLTEXT)
 	@Size(min=2,max=64) 
-	private String tag;
+    private String tag;
 	private Integer freq;
 	
 	@RelatedToVia(elementClass = TagSimilarity.class, type = RelationType.TagSimilarity, direction = Direction.BOTH)
@@ -34,7 +37,8 @@ public class Tag extends PKMNode {
 	}
 
 	public Collection<TagSimilarity> getTagSimilarities() {
-		return IteratorUtil.asCollection(tagSimilarities);
+		   Iterable<TagSimilarity> ts = tagSimilarities;
+	       return ts == null ? Collections.<TagSimilarity>emptyList() : IteratorUtil.asCollection(ts);
 	}
 	public Integer getFreq() {
 		return freq;

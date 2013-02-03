@@ -1,6 +1,7 @@
 package com.huaxinshengyuan.pkm.services;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.helpers.collection.IteratorUtil;
@@ -12,8 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.huaxinshengyuan.pkm.domain.Group;
 import com.huaxinshengyuan.pkm.domain.RelationType;
+import com.huaxinshengyuan.pkm.domain.Tag;
 import com.huaxinshengyuan.pkm.domain.User;
 import com.huaxinshengyuan.pkm.domain.UserInGroup;
+import com.huaxinshengyuan.pkm.domain.UserTag;
 import com.huaxinshengyuan.pkm.domain.UserType;
 import com.huaxinshengyuan.pkm.repository.UserRepository;
 
@@ -69,6 +72,22 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<User> findFriends(User u) {
 		return userRepository.findFriends(u);
+	}
+
+	@Override @Transactional
+	public void addTag(User user, Tag tag) {
+		UserTag userTag = template.getRelationshipBetween(user, tag, UserTag.class, RelationType.UserOwnedTag);
+        if(userTag==null)
+        {
+        	userTag = template.createRelationshipBetween(user, tag, UserTag.class, RelationType.UserOwnedTag, false);
+        	userTag.setCreated(new Date());
+        	userTag.setFreq(1);
+        }
+        else
+        {
+        	userTag.setFreq(userTag.getFreq().intValue()+1);
+        }
+        template.save(userTag);
 	}
 
 }

@@ -5,7 +5,11 @@ import org.neo4j.helpers.collection.IteratorUtil;
 import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.RelatedToVia;
+import org.springframework.data.neo4j.fieldaccess.DynamicProperties;
+
 import java.util.Collection;
+import java.util.Collections;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 
@@ -25,7 +29,11 @@ public class User extends PKMNode {
     private String facebook;
 	private String password;
     private Role[] roles;
-    
+	private DynamicProperties dyn;
+	@RelatedToVia(elementClass = UserTag.class, type = RelationType.UserOwnedTag, direction = Direction.OUTGOING)
+	private Iterable<UserTag> userTags;
+    @RelatedToVia(type=RelationType.UserInGroup,direction=Direction.OUTGOING,elementClass=UserInGroup.class)@Fetch
+    private  Iterable<UserInGroup> userInGroups;
     public User() {}
     public User(String login, String name, String password, Role... role) {
         this.login = login;
@@ -100,21 +108,26 @@ public class User extends PKMNode {
 		this.facebook = facebook;
 	}
 
-	
+	public DynamicProperties getDyn() {
+		return dyn;
+	}
+	public void setDyn(DynamicProperties dyn) {
+		this.dyn = dyn;
+	}
 	@Override
 	 public String toString() {
 	        return String.format("%s (%s)", name, login);
 	 }
-
-	/***********this does not work************/
-    @RelatedToVia(type=RelationType.UserInGroup,direction=Direction.OUTGOING,elementClass=UserInGroup.class)@Fetch
-    private  Iterable<UserInGroup> userInGroups;
     
     public Collection<UserInGroup> getUserInGroups()
     {
-    	return IteratorUtil.asCollection(userInGroups);
+	    Iterable<UserInGroup> ugs = userInGroups;
+        return ugs == null ? Collections.<UserInGroup>emptyList() : IteratorUtil.asCollection(ugs);
     }
 
-
+	public Collection<UserTag> getUserTags() {
+	    Iterable<UserTag> alluserTagss = userTags;
+        return alluserTagss == null ? Collections.<UserTag>emptyList() : IteratorUtil.asCollection(alluserTagss);
+	}
 
 }

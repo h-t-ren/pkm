@@ -35,7 +35,9 @@
 
         <li><a class="headerActiveLink" href="<c:url value="/admin" />"><fmt:message key="admin" /></a></li>
         <li><a class="headerActiveLink" href="<c:url value="/user/list" />"><fmt:message key="userManagement" /></a></li>
- 	    <li><a class="headerActiveLink" href="<c:url value="/knowledge/dashboard" />"><fmt:message key="newKnowledge" /></a></li>
+ 	    <li><a class="headerActiveLink" href="<c:url value="/knowledge/dashboard" />"><fmt:message key="myKnowledge" /></a></li>
+      
+
 </ul>
 
 </div>

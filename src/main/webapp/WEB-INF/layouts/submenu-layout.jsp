@@ -59,7 +59,7 @@
 		,	south__spacing_closed:		21		// big resizer-bar when open (zero height)
 
 		//	some pane-size settings
-		,	west__minSize:				250
+		,	west__minSize:				180
 		,	center__minWidth:			500
 
 		//	some pane animation settings
@@ -70,7 +70,7 @@
 		,	west__fxName_close:			"none"	// NO animation when closing west-pane
 
 		});
-		myLayout.sizePane("west", 250);
+		myLayout.sizePane("west", 180);
 		myLayout.sizePane("south", 16);
 
  	});
